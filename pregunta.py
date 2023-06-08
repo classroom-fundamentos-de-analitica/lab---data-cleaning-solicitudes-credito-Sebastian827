@@ -17,7 +17,7 @@ def clean_data():
     
     df.dropna(axis=0, inplace=True)
 
-    
+    df['fecha_de_beneficio'] = pd.to_datetime(df['fecha_de_beneficio'], dayfirst=True)
     df['sexo'] = df['sexo'].str.lower()
     df['sexo'] = df['sexo'].str.replace('_', ' ')
     df['sexo'] = df['sexo'].str.replace('-', ' ')
@@ -42,7 +42,7 @@ def clean_data():
     df['estrato'] = df['estrato'].astype(int)
     df['comuna_ciudadano'] = df['comuna_ciudadano'].astype(int)
 
-    df['fecha_de_beneficio'] = pd.to_datetime(df['fecha_de_beneficio'], dayfirst=True)
+    
     
 
     
@@ -59,7 +59,7 @@ def clean_data():
     df.drop_duplicates(inplace=True)
 
 
-    #print(df['tipo_de_emprendimiento'].value_counts().to_list())
+    print(df)
     #print(df['línea_credito'].isnull().sum())
     #
     # Inserte su código aquí
