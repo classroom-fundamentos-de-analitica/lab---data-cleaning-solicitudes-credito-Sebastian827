@@ -59,7 +59,7 @@ def clean_data():
     df.drop_duplicates(inplace=True)
 
 
-    print(df['tipo_de_emprendimiento'].value_counts().to_list())
+    #print(df['tipo_de_emprendimiento'].value_counts().to_list())
     #print(df['línea_credito'].isnull().sum())
     #
     # Inserte su código aquí
