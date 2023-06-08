@@ -7,6 +7,8 @@ correctamente. Tenga en cuenta datos faltantes y duplicados.
 
 """
 import pandas as pd
+import re
+from datetime import datetime
 
 
 def clean_data():
@@ -17,7 +19,7 @@ def clean_data():
     
     df.dropna(axis=0, inplace=True)
 
-    df['fecha_de_beneficio'] = pd.to_datetime(df['fecha_de_beneficio'], dayfirst=True)
+
     df['sexo'] = df['sexo'].str.lower()
     df['sexo'] = df['sexo'].str.replace('_', ' ')
     df['sexo'] = df['sexo'].str.replace('-', ' ')
@@ -42,10 +44,7 @@ def clean_data():
     df['estrato'] = df['estrato'].astype(int)
     df['comuna_ciudadano'] = df['comuna_ciudadano'].astype(int)
 
-    
-    
-
-    
+    df['fecha_de_beneficio'] = [datetime.strptime(date, "%d/%m/%Y") if bool(re.search(r"\d{1,2}/\d{2}/\d{4}", date))else datetime.strptime(date, "%Y/%m/%d") for date in df['fecha_de_beneficio']]    
     
     df['monto_del_credito']=df['monto_del_credito'].str.strip('$')
     df['monto_del_credito']=df['monto_del_credito'].str.replace(",","")
@@ -59,7 +58,7 @@ def clean_data():
     df.drop_duplicates(inplace=True)
 
 
-    print(df)
+    #print(df.sexo.value_counts().to_list())
     #print(df['línea_credito'].isnull().sum())
     #
     # Inserte su código aquí
